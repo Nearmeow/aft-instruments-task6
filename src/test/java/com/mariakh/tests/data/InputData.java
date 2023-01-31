@@ -1,5 +1,7 @@
 package com.mariakh.tests.data;
 
+import com.mariakh.framework.model.Deposit;
+
 public class InputData {
 
     private String baseMenuName;
@@ -9,8 +11,10 @@ public class InputData {
     private String[] bankArray;
     private String[] checkboxArray;
     private String expectedCount;
+    private Deposit expectedDeposit;
 
-    public InputData(String baseMenuName, String amount, String term, String depositType, String[] bankArray, String[] checkboxArray, String expectedCount) {
+    public InputData(String baseMenuName, String amount, String term, String depositType, String[] bankArray
+            , String[] checkboxArray, String expectedCount, Deposit expectedDeposit) {
         this.baseMenuName = baseMenuName;
         this.amount = amount;
         this.term = term;
@@ -18,6 +22,7 @@ public class InputData {
         this.bankArray = bankArray;
         this.checkboxArray = checkboxArray;
         this.expectedCount = expectedCount;
+        this.expectedDeposit = expectedDeposit;
     }
 
     public InputData() {
@@ -49,5 +54,9 @@ public class InputData {
 
     public String getExpectedCount() {
         return expectedCount;
+    }
+
+    public Deposit getExpectedDeposit() {
+        return expectedDeposit;
     }
 }

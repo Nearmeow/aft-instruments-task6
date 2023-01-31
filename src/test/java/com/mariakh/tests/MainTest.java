@@ -1,6 +1,7 @@
 package com.mariakh.tests;
 
 import com.mariakh.tests.base.BaseTests;
+import com.mariakh.framework.model.Deposit;
 import com.mariakh.tests.data.InputData;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,10 +12,12 @@ public class MainTest extends BaseTests {
         return new InputData[] {
                 new InputData("deposits", "1000000", "6 месяцев", "Обычные вклады"
                         , new String[] {"Открытие", "Тинькофф", "ВТБ", "ГазпромБанк", "Сбербанк"}
-                        , new String[] {"Со снятием", "С пополнением", "С капитализацией"}, "14"),
+                        , new String[] {"Со снятием", "С пополнением", "С капитализацией"}, "15"
+                , new Deposit("Газпромбанк", "6,67", "182", "33726")),
                 new InputData("deposits", "500000", "2 года", "Детский"
                         , new String[] {"Ак Барс Банк", "РОССИЯ", "Сбербанк"}
-                        , new String[] {"С выплатой процентов"}, "7")
+                        , new String[] {"С выплатой процентов"}, "7"
+                , new Deposit("Сбербанк", "6,80", "730", "72515"))
         };
     }
 
@@ -33,33 +36,16 @@ public class MainTest extends BaseTests {
                 .clickBanksArray(inputData.getBankArray())
                 .clickAdditionalCheckArray(inputData.getCheckboxArray())
                 .clickSearch()
-                .checkOpenResultsPage(inputData.getExpectedCount());
-    }
-    //@Test
-    /*public void test() {
-        pageManager.getStartPage().clickBaseMenu("deposits")
-                .checkOpenDepositPage()
-                .clickSettings()
-                .fillAmount("1000000")
-                .clickDropDownButton("Срок")
-                .chooseValue("6 месяцев")
-                .clickDropDownButton("Тип вклада")
-                .chooseValue("Обычные вклады")
-                .clickBanksButton("Открытие")
-                .clickBanksButton("Тинькофф")
-                .clickBanksButton("ВТБ")
-                .clickBanksButton("ГазпромБанк")
-                .clickBanksButton("Сбербанк")
-                .clickAdditionalCheckbox("Со снятием")
-                .clickAdditionalCheckbox("С пополнением")
-                .clickAdditionalCheckbox("С капитализацией")
-                .clickSearch()
-                .checkOpenResultsPage();
+                .checkOpenResultsPage(inputData.getExpectedCount())
+                .depositCheck(inputData.getExpectedDeposit());
+
 
         try {
-            Thread.sleep(7000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
+
+
 }
