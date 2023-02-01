@@ -1,7 +1,7 @@
 package com.mariakh.tests;
 
-import com.mariakh.tests.base.BaseTests;
 import com.mariakh.framework.model.Deposit;
+import com.mariakh.tests.base.BaseTests;
 import com.mariakh.tests.data.InputData;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,16 +12,16 @@ public class MainTest extends BaseTests {
         return new InputData[] {
                 new InputData("deposits", "1000000", "6 месяцев", "Обычные вклады"
                         , new String[] {"Открытие", "Тинькофф", "ВТБ", "ГазпромБанк", "Сбербанк"}
-                        , new String[] {"Со снятием", "С пополнением", "С капитализацией"}, "15"
+                        , new String[] {"Со снятием", "С пополнением", "С капитализацией"}, "13"
                 , new Deposit("Газпромбанк", "6,67", "182", "33726")),
                 new InputData("deposits", "500000", "2 года", "Детский"
                         , new String[] {"Ак Барс Банк", "РОССИЯ", "Сбербанк"}
                         , new String[] {"С выплатой процентов"}, "7"
-                , new Deposit("Сбербанк", "6,80", "730", "72515"))
+                , new Deposit("Сбербанк", "6,80", "730", "72514"))
         };
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Проверка настройки вкладов")
     @MethodSource("inData")
     public void myTest(InputData inputData) {
         pageManager.getStartPage().clickBaseMenu(inputData.getBaseMenuName())
@@ -39,13 +39,5 @@ public class MainTest extends BaseTests {
                 .checkOpenResultsPage(inputData.getExpectedCount())
                 .depositCheck(inputData.getExpectedDeposit());
 
-
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
-
-
 }

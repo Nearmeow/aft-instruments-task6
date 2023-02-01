@@ -32,4 +32,14 @@ public class Deposit {
     public String getIncome() {
         return income;
     }
+
+    @Override
+    public String toString() {
+        return "Вклад{" +
+                "Банк='" + bank + '\'' +
+                ", Ставка='" + rate + '\'' +
+                ", Срок='" + term + '\'' +
+                ", Доход='" + income + '\'' +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package com.mariakh.framework.managers;
 
+import org.apache.commons.exec.OS;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -7,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
 
-    private static DriverManager instance;
+    private static DriverManager instance = null;
 
     private WebDriver driver;
 
@@ -38,18 +39,46 @@ public class DriverManager {
     }
 
     private void initDriver() {
+        if (OS.isFamilyWindows()) {
+            initDriverWindowsOsFamily();
+        } else if (OS.isFamilyMac()) {
+            initDriverMacOsFamily();
+        }   else if (OS.isFamilyUnix()) {
+            initDriverUnixOsFamily();
+        }
+    }
+
+    private void initDriverWindowsOsFamily() {
+        initDriverAnyOsFamily(propManager.getProperty("path.chrome.driver.windows")
+        , propManager.getProperty("path.firefox.driver.windows")
+        , propManager.getProperty("path.edge.driver.windows"));
+    }
+
+    private void initDriverMacOsFamily() {
+        initDriverAnyOsFamily(propManager.getProperty("path.chrome.driver.mac")
+                , propManager.getProperty("path.firefox.driver.mac")
+                , propManager.getProperty("path.edge.driver.mac"));
+    }
+
+    private void initDriverUnixOsFamily() {
+        initDriverAnyOsFamily(propManager.getProperty("path.chrome.driver.unix")
+                , propManager.getProperty("path.firefox.driver.unix")
+                , propManager.getProperty("path.edge.driver.unix"));
+    }
+
+    private void initDriverAnyOsFamily(String chrome, String gecko, String edge) {
         String browser = System.getProperty("browser", "chrome");
         switch (browser) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", propManager.getProperty("path.chrome.driver.windows"));
+                System.setProperty("webdriver.chrome.driver", chrome);
                 driver = new ChromeDriver();
                 break;
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", propManager.getProperty("path.firefox.driver.windows"));
+                System.setProperty("webdriver.gecko.driver", gecko);
                 driver = new FirefoxDriver();
                 break;
             case "edge":
-                System.setProperty("webdriver.edge.driver", propManager.getProperty("path.edge.driver.windows"));
+                System.setProperty("webdriver.edge.driver", edge);
                 driver = new EdgeDriver();
                 break;
         }
