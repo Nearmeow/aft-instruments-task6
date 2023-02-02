@@ -1,7 +1,6 @@
 package com.mariakh.framework.pages;
 
 import com.mariakh.framework.utils.StringHandler;
-import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -27,20 +26,17 @@ public class DepositSettingsPage extends BasePage {
     @FindBy(xpath = "//div[contains(@class, 'StyledBottom')]/button")
     private WebElement searchButton;
 
-    @Step("Проверить, что страница настроек вкладов открылась")
     public DepositSettingsPage checkOpenDepositSettingsPage() {
         Assertions.assertTrue(searchButton.isDisplayed(), "Блок параметров выбора вклада не отображен на странице.");
         return this;
     }
 
-    @Step("Заполнить поле значением - {amount}")
     public DepositSettingsPage fillAmount(String amount) {
         amountInput.sendKeys(amount);
         wait.until(ExpectedConditions.attributeToBe(amountInput, "value", StringHandler.getFormattedString(amount)));
         return this;
     }
 
-    @Step("Кликнуть на выпадающее меню {fieldName}")
     public DepositSettingsPage clickDropDownButton(String fieldName) {
         WebElement dropDownMenuButton = settingsBlock.findElement(By.xpath(".//label[text()='" + fieldName + "']/..//div[@role]"));
         dropDownMenuButton.click();
@@ -48,7 +44,6 @@ public class DepositSettingsPage extends BasePage {
         return this;
     }
 
-    @Step("Выбрать из списка значение - {term}")
     public DepositSettingsPage chooseValue(String term) {
         waitStabilityPage(2500, 250);
         for (WebElement elem : termList) {
@@ -61,9 +56,8 @@ public class DepositSettingsPage extends BasePage {
         return this;
     }
 
-    @Step("Кликнуть на список банков")
-    public DepositSettingsPage clickBanksArray(String[] banksArray) {
-        for (String bank : banksArray) {
+    public DepositSettingsPage clickBanksArray(List<String> banksList) {
+        for (String bank : banksList) {
             banksInput.click();
             banksInput.sendKeys(bank);
             waitStabilityPage(3000, 250);
@@ -74,16 +68,14 @@ public class DepositSettingsPage extends BasePage {
         return this;
     }
 
-    @Step("Отметить дополнительные чекбоксы")
-    public DepositSettingsPage clickAdditionalCheckArray(String[] checkboxArray) {
-        for (String checkbox : checkboxArray) {
+    public DepositSettingsPage clickAdditionalCheckArray(List<String> checkboxList) {
+        for (String checkbox : checkboxList) {
             getCheckboxByName(checkbox).click();
             waitStabilityPage(3000, 250);
         }
         return this;
     }
 
-    @Step("Нажать на кнопку поиска результатов")
     public ResultPage clickSearch() {
         searchButton.click();
         return pageManager.getResultPage();

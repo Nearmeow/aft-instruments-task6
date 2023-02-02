@@ -14,6 +14,7 @@ public class InitManager {
                 .implicitlyWait(Duration.ofSeconds(Integer.parseInt(props.getProperty("implicitly.wait"))));
         driverManager.getDriver().manage().timeouts()
                 .pageLoadTimeout(Duration.ofSeconds(Integer.parseInt(props.getProperty("page.load.timeout"))));
+        driverManager.getDriver().get(props.getProperty("base.url"));
     }
 
     public static void quitFramework() {

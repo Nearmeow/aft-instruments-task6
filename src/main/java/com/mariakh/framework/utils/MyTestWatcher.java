@@ -1,7 +1,6 @@
 package com.mariakh.framework.utils;
 
 import com.mariakh.framework.managers.DriverManager;
-import io.qameta.allure.Attachment;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.OutputType;
@@ -14,7 +13,8 @@ public class MyTestWatcher implements TestWatcher {
         getScreenshot();
     }
 
-    @Attachment(value = "Screenshot", type = "image/png", fileExtension = "png")
+    //@Attachment(value = "Screenshot", type = "image/png", fileExtension = "png")
+
     public byte[] getScreenshot() {
         return ((TakesScreenshot) DriverManager.getInstance().getDriver()).getScreenshotAs(OutputType.BYTES);
     }

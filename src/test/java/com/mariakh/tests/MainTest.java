@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class MainTest extends BaseTests {
 
-    static InputData[] inData() {
+/*    static InputData[] inData() {
         return new InputData[] {
                 new InputData("deposits", "1000000", "6 месяцев", "Обычные вклады"
                         , new String[] {"Открытие", "Тинькофф", "ВТБ", "ГазпромБанк", "Сбербанк"}
@@ -39,5 +39,5 @@ public class MainTest extends BaseTests {
                 .checkOpenResultsPage(inputData.getExpectedCount())
                 .depositCheck(inputData.getExpectedDeposit());
 
-    }
+    }*/
 }

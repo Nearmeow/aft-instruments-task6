@@ -1,6 +1,5 @@
 package com.mariakh.framework.pages;
 
-import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,7 +12,6 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//li[@class='main-menu__sections-item ']")
     private List<WebElement> baseMenuLinksList;
 
-    @Step("Клик на базовое меню - {linkName}")
     public DepositPage clickBaseMenu(String linkName) {
         for (WebElement elem : baseMenuLinksList) {
             if (elem.getAttribute("data-submenu-idx").equals(linkName)) {

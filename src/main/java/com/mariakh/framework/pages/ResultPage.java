@@ -2,7 +2,6 @@ package com.mariakh.framework.pages;
 
 import com.mariakh.framework.model.Deposit;
 import com.mariakh.framework.utils.StringHandler;
-import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -18,7 +17,6 @@ public class ResultPage extends BasePage {
     @FindBy(xpath = "//div[contains(@class, 'SearchResults')]")
     private List<WebElement> resultItems;
 
-    @Step("Проверить, что страница результатов открылась, ожидаемое количество вкладов в списке - {expectedCount}")
     public ResultPage checkOpenResultsPage(String expectedCount) {
         //actions.moveToElement(searchResults, -200, 0).click().build().perform();
         actions.sendKeys(Keys.TAB).click().build().perform();
@@ -28,7 +26,6 @@ public class ResultPage extends BasePage {
         return this;
     }
 
-    @Step("Проверить, что ожидаемый вклад есть в списке")
     public ResultPage depositCheck(Deposit deposit) {
         WebElement expectedBank = getResultItemByBankName(deposit.getBank());
         String actualRate = StringHandler.cleanString(expectedBank.findElement(By.xpath(".//span[text()='Cтавка']/../../following-sibling::div")).getText());
