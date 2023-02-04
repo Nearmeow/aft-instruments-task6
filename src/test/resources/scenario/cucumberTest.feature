@@ -1,6 +1,6 @@
 # language: ru
 
-  @withdrawal
+  @all
   Функция: Депозит
 
     @firstTest

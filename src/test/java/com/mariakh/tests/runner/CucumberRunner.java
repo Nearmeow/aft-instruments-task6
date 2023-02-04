@@ -6,9 +6,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/scenario",
+        plugin = "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm",
+        features = "src/test/resources/scenario/",
         glue = "com/mariakh/framework/steps",
         tags = "@firstTest"
 )
-public class CucumberRunnerTest {
+public class CucumberRunner {
 }
