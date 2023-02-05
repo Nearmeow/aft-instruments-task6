@@ -1,18 +1,15 @@
 package com.mariakh.framework.managers;
 
-import com.mariakh.framework.pages.DepositPage;
-import com.mariakh.framework.pages.DepositSettingsPage;
-import com.mariakh.framework.pages.ResultPage;
-import com.mariakh.framework.pages.StartPage;
+import com.mariakh.framework.pages.*;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PageManager {
 
     private static PageManager instance;
-    private StartPage startPage;
-    private DepositPage depositPage;
-    private DepositSettingsPage depositSettingsPage;
-
-    private ResultPage resultPage;
+    private static Map<String, Object> pagesMap = new HashMap<>();
 
     private PageManager() {
     }
@@ -24,31 +21,19 @@ public class PageManager {
         return instance;
     }
 
-    public StartPage getStartPage() {
-        if (startPage == null) {
-            startPage = new StartPage();
+    public <T extends BasePage> T getPage(Class<T> page) {
+        if (pagesMap.isEmpty() || pagesMap.get(page.getName()) == null) {
+            try {
+                pagesMap.put(page.getName(), page.getConstructor().newInstance());
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException e) {
+                e.printStackTrace();
+            }
         }
-        return startPage;
+        return (T) pagesMap.get(page.getName());
     }
 
-    public DepositPage getDepositPage() {
-        if (depositPage == null) {
-            depositPage = new DepositPage();
-        }
-        return depositPage;
-    }
-
-    public DepositSettingsPage getDepositSettingsPage() {
-        if (depositSettingsPage == null) {
-            depositSettingsPage = new DepositSettingsPage();
-        }
-        return depositSettingsPage;
-    }
-
-    public ResultPage getResultPage() {
-        if (resultPage == null) {
-            resultPage = new ResultPage();
-        }
-        return resultPage;
+    public void clearPages() {
+        pagesMap.clear();
     }
 }

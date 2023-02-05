@@ -16,11 +16,10 @@ public class StartPage extends BasePage {
         for (WebElement elem : baseMenuLinksList) {
             if (elem.getAttribute("data-submenu-idx").equals(linkName)) {
                 elem.findElement(By.xpath("./div/a")).click();
-                return pageManager.getDepositPage();
+                return pageManager.getPage(DepositPage.class);
             }
         }
         Assertions.fail("Меню по заданному имени не найдено.");
-        return pageManager.getDepositPage();
+        return null;
     }
-
 }

@@ -1,6 +1,8 @@
 package com.mariakh.framework.steps;
 
 import com.mariakh.framework.managers.PageManager;
+import com.mariakh.framework.pages.DepositSettingsPage;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.ru.И;
 
 import java.util.Arrays;
@@ -12,36 +14,45 @@ public class DepositSettingsPageStep {
 
     @И("^Проверка открытия настроек вкладов$")
     public void checkOpenDepositPage() {
-        pageManager.getDepositSettingsPage().checkOpenDepositSettingsPage();
+        pageManager.getPage(DepositSettingsPage.class).checkOpenDepositSettingsPage();
     }
 
     @И("^Заполнить поле значением - '(.+)'$")
     public void fillAmount(String amount) {
-        pageManager.getDepositSettingsPage().fillAmount(amount);
+        pageManager.getPage(DepositSettingsPage.class).fillAmount(amount);
     }
 
     @И("^Кликнуть на выпадающее меню '(.+)'$")
     public void clickDropDownButton(String fieldName) {
-        pageManager.getDepositSettingsPage().clickDropDownButton(fieldName);
+        pageManager.getPage(DepositSettingsPage.class).clickDropDownButton(fieldName);
     }
 
     @И("^Выбрать из списка значение - '(.+)'$")
     public void chooseValue(String value) {
-        pageManager.getDepositSettingsPage().chooseValue(value);
+        pageManager.getPage(DepositSettingsPage.class).chooseValue(value);
     }
 
-    @И("^Выбрать банки из списка$")
+/*
+        @И("^Выбрать банки из списка (.*)$")
     public void clickBanksArray(List<String> banksList) {
         pageManager.getDepositSettingsPage().clickBanksArray(banksList);
     }
+*/
 
-    @И("^Отметить дополнительные чекбоксы$")
-    public void clickAdditionalCheckboxes(List<String> checkboxList) {
-        pageManager.getDepositSettingsPage().clickAdditionalCheckArray(checkboxList);
+    @И("^Выбрать банки из списка (.*)$")
+    public void clickBanksArray(String banksStr) {
+        List<String> banks = Arrays.asList(banksStr.split("\\s*,\\s*"));
+        pageManager.getPage(DepositSettingsPage.class).clickBanksArray(banks);
+    }
+
+    @И("^Отметить дополнительные чекбоксы (.*)$")
+    public void clickAdditionalCheckboxes(String checkboxStr) {
+        List<String> checkboxList = Arrays.asList(checkboxStr.split("\\s*,\\s*"));
+        pageManager.getPage(DepositSettingsPage.class).clickAdditionalCheckArray(checkboxList);
     }
 
     @И("^Нажать на кнопку поиска результатов$")
     public void clickSearch() {
-        pageManager.getDepositSettingsPage().clickSearch();
+        pageManager.getPage(DepositSettingsPage.class).clickSearch();
     }
 }

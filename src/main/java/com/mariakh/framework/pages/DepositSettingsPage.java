@@ -78,7 +78,7 @@ public class DepositSettingsPage extends BasePage {
 
     public ResultPage clickSearch() {
         searchButton.click();
-        return pageManager.getResultPage();
+        return pageManager.getPage(ResultPage.class);
     }
 
     private WebElement getCheckboxByName(String checkboxName) {
@@ -90,5 +90,4 @@ public class DepositSettingsPage extends BasePage {
         Assertions.fail("Не найден чекбокс с текстом " + checkboxName);
         return null;
     }
-
 }

@@ -20,6 +20,6 @@ public class DepositPage extends BasePage {
 
     public DepositSettingsPage clickSettings() {
         settingsButton.click();
-        return pageManager.getDepositSettingsPage();
+        return pageManager.getPage(DepositSettingsPage.class);
     }
 }
