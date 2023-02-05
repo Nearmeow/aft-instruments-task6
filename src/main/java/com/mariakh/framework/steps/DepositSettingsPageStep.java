@@ -2,7 +2,6 @@ package com.mariakh.framework.steps;
 
 import com.mariakh.framework.managers.PageManager;
 import com.mariakh.framework.pages.DepositSettingsPage;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.ru.И;
 
 import java.util.Arrays;
@@ -32,20 +31,13 @@ public class DepositSettingsPageStep {
         pageManager.getPage(DepositSettingsPage.class).chooseValue(value);
     }
 
-/*
-        @И("^Выбрать банки из списка (.*)$")
-    public void clickBanksArray(List<String> banksList) {
-        pageManager.getDepositSettingsPage().clickBanksArray(banksList);
-    }
-*/
-
-    @И("^Выбрать банки из списка (.*)$")
+    @И("^Выбрать банки из списка - (.*)$")
     public void clickBanksArray(String banksStr) {
         List<String> banks = Arrays.asList(banksStr.split("\\s*,\\s*"));
         pageManager.getPage(DepositSettingsPage.class).clickBanksArray(banks);
     }
 
-    @И("^Отметить дополнительные чекбоксы (.*)$")
+    @И("^Отметить дополнительные чекбоксы - (.*)$")
     public void clickAdditionalCheckboxes(String checkboxStr) {
         List<String> checkboxList = Arrays.asList(checkboxStr.split("\\s*,\\s*"));
         pageManager.getPage(DepositSettingsPage.class).clickAdditionalCheckArray(checkboxList);

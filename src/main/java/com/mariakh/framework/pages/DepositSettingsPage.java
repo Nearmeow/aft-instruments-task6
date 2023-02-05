@@ -16,7 +16,7 @@ public class DepositSettingsPage extends BasePage {
     @FindBy(xpath = "//input[@name='amount']")
     private WebElement amountInput;
     @FindBy(xpath = "//div[@data-placement='bottom']//ul/li")
-    private List<WebElement> termList;
+    private List<WebElement> dropDownList;
     @FindBy(xpath = "//div[contains(@class, 'StyledBody')]//input[@type='text' and not(@name)]")
     private WebElement banksInput;
     @FindBy(xpath = "//div[@data-placement='bottom']//ul[last()]")
@@ -44,15 +44,17 @@ public class DepositSettingsPage extends BasePage {
         return this;
     }
 
-    public DepositSettingsPage chooseValue(String term) {
+    public DepositSettingsPage chooseValue(String value) {
         waitStabilityPage(2500, 250);
-        for (WebElement elem : termList) {
-            if (elem.findElement(By.xpath("./div")).getText().contains(term)) {
+        for (WebElement elem : dropDownList) {
+            if (elem.findElement(By.xpath("./div")).getText().contains(value)) {
                 elem.click();
+                Assertions.assertEquals(settingsBlock.findElement(By.xpath(".//span[text()='" + value + "']"))
+                        .getAttribute("color"), "minorDarkBlue", "Поле выпадающего меню не содержит ожидаемого значения - " + value);
                 return this;
             }
         }
-        Assertions.fail("Не смогли кликнуть на значение - " + term);
+        Assertions.fail("Не нашли значение " + value + " в выпадающем списке.");
         return this;
     }
 

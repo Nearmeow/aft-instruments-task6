@@ -28,6 +28,8 @@ public class ResultPage extends BasePage {
 
     public ResultPage depositCheck(Deposit deposit) {
         WebElement expectedBank = getResultItemByBankName(deposit.getBank());
+        scrollToElementJs(expectedBank);
+        waitStabilityPage(2500, 250);
         String actualRate = StringHandler.cleanString(expectedBank.findElement(By.xpath(".//span[text()='Cтавка']/../../following-sibling::div")).getText());
         String actualTerm = StringHandler.cleanString(expectedBank.findElement(By.xpath(".//div[text()='Срок']/following-sibling::div")).getText());
         String actualIncome = StringHandler.cleanString(expectedBank.findElement(By.xpath(".//div[text()='Доход']/following-sibling::div")).getText());

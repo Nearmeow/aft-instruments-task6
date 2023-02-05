@@ -1,7 +1,6 @@
 package com.mariakh.framework.steps;
 
 import com.mariakh.framework.managers.PageManager;
-import com.mariakh.framework.pages.DepositSettingsPage;
 import com.mariakh.framework.pages.StartPage;
 import io.cucumber.java.ru.И;
 

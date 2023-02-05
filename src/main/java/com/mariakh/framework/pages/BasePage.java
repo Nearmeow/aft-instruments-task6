@@ -20,8 +20,6 @@ public class BasePage {
 
     protected Actions actions = new Actions(driverManager.getDriver());
 
-    protected Duration clickDelay = Duration.ofMillis(300);
-
     public BasePage() {
         PageFactory.initElements(driverManager.getDriver(), this);
     }
@@ -40,14 +38,6 @@ public class BasePage {
                 return;
             }
         }
-    }
-
-    protected void scrollToPageTop() {
-        js.executeScript("window.scrollTo(0, document.body.scrollTop);");
-    }
-
-    protected void scrollToPageBottom() {
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
     }
 
     private void sleep(int millis) {
