@@ -19,8 +19,8 @@ public class ResultPageSteps {
 
     @И("^Проверить наличие вклада в списке результатов - (.+)$")
     public void checkDepositPresence(String depositString) {
-        List<String> depositInfo = Arrays.asList(depositString.split("\\s*,\\s*"));
-        Deposit deposit = new Deposit(depositInfo.get(0), depositInfo.get(1).replace(".", ","), depositInfo.get(2), depositInfo.get(3));
+        List<String> depositInfo = Arrays.asList(depositString.split("\\s*-\\s*"));
+        Deposit deposit = new Deposit(depositInfo.get(0), depositInfo.get(1), depositInfo.get(2), depositInfo.get(3));
         pageManager.getPage(ResultPage.class).depositCheck(deposit);
     }
 
